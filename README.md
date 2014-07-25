@@ -35,6 +35,6 @@ you can access the direction of the scrolling by: `e.direction.y`.
 ###### example ######
 ```javascript
 $( "div#abc" ).on('scroll_y_only', function(e) {
-    console.log(e.direction.y); // Possible out put (for 'y'): 'down', 'up'
+    console.log(e.direction.y); // Possible output (for 'y'): 'down', 'up'
 });
 ```
