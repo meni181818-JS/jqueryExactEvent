@@ -85,20 +85,6 @@ $.fn.registerScrollElement = function() {
     return this;
 }
 
-// update Last Scroll Pos to current pos (params can by: 'all', 'y', 'x')
-/* $.fn.updateLastScrollPos = function(which) {
-    elemontObj = this['0'];
-    if(which == 'all') {
-        elemontObj.scrollE.y.last_pos = $( this ).scrollTop();
-        elemontObj.scrollE.x.last_pos = $( this ).scrollLeft();
-    } else if(which == 'y') {
-        elemontObj.scrollE.y.last_pos = $( this ).scrollTop();
-    } else if(which == 'x') {
-        elemontObj.scrollE.x.last_pos = $( this ).scrollLeft();
-    }
-    return this;
-} */
-
 // check if the element is registered for 'scrollE' object
 $.fn.checkScrollRegistration = function() {
     elemontObj = this['0'];
