@@ -13,6 +13,11 @@ Events:
 
 - `scroll_y_and_x` vertical and Horizontal scrolling Happens Together (`scroll_y_only`, and `scroll_x_only` not firing).
 
+##### Examples #####
 ```javascript
-'scroll_y_only'
+$( document ).on('scroll_x_only', function(e) {
+    if(e.target.nodeName == '#document') {
+        console.log('#document was scrolled. ' + "direction is " + e.direction.x);
+    }
+});
 ```
