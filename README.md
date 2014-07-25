@@ -17,7 +17,11 @@ Events:
 ```javascript
 $( document ).on('scroll_x_only', function(e) {
     if(e.target.nodeName == '#document') {
-        console.log('#document was scrolled. ' + "direction is " + e.direction.x);
+        // do stuff
     }
+});
+
+$( "div#abc" ).on('scroll_y_only', function() {
+
 });
 ```
