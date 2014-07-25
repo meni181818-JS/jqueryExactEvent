@@ -6,8 +6,7 @@ Special and exact Events For jquery
 
 Events:
 -------
-scroll:
-_______
+##### scroll: #####
 ```javascript
 'scroll_y_only'
 ```
