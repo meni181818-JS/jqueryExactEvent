@@ -113,6 +113,11 @@ $.fn.checkScrollRegistration = function() {
 $.fn.enableScroll = function(side, bool) {
     $( this ).checkScrollRegistration();
     elemontObj = this['0'];
+    
+    if(typeof bool === 'undefined') { // if 'bool' not passed. (return current boolean state)
+        return elemontObj.scrollE[side].enabled;
+    }
+
     if(side == 'y') { // update Last Scroll Pos (to lock on current pos)
         elemontObj.scrollE.y.last_pos = $( this ).scrollTop();
     } else if(side == 'x') {
