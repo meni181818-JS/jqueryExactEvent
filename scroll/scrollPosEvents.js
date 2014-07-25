@@ -60,13 +60,13 @@ function scrollingHandler(e) {
             if(scrollE.y.enabled == false) {
                 $( e.target ).scrollTop(scrollE.y.last_pos);
             } else {
-                $( e.target ).updateLastScrollPos('y');
+                scrollE.y.last_pos = $( e.target ).scrollTop();
             } 
         } else if(side == 'x') {
             if(scrollE.x.enabled == false) {
                  $( e.target ).scrollLeft(scrollE.x.last_pos);
             } else {
-                $( e.target ).updateLastScrollPos('x');
+                scrollE.x.last_pos = $( e.target ).scrollLeft();
             } 
         }
     }
@@ -80,12 +80,13 @@ $.fn.registerScrollElement = function() {
                      x: {last_pos: 0, enabled: true}};
     elemontObj.scrollE = $.extend(true, {}, scrollObj);
     // update the 'last_pos' properties to the current position
-    $( this ).updateLastScrollPos('all');
+    elemontObj.scrollE.y.last_pos = $( this ).scrollTop();
+    elemontObj.scrollE.x.last_pos = $( this ).scrollLeft();
     return this;
 }
 
 // update Last Scroll Pos to current pos (params can by: 'all', 'y', 'x')
-$.fn.updateLastScrollPos = function(which) {
+/* $.fn.updateLastScrollPos = function(which) {
     elemontObj = this['0'];
     if(which == 'all') {
         elemontObj.scrollE.y.last_pos = $( this ).scrollTop();
@@ -96,7 +97,7 @@ $.fn.updateLastScrollPos = function(which) {
         elemontObj.scrollE.x.last_pos = $( this ).scrollLeft();
     }
     return this;
-}
+} */
 
 // check if the element is registered for 'scrollE' object
 $.fn.checkScrollRegistration = function() {
@@ -112,7 +113,11 @@ $.fn.checkScrollRegistration = function() {
 $.fn.enableScroll = function(side, bool) {
     $( this ).checkScrollRegistration();
     elemontObj = this['0'];
-    $( this ).updateLastScrollPos(side); // update Last Scroll Pos (to lock on current pos)
+    if(side == 'y') { // update Last Scroll Pos (to lock on current pos)
+        elemontObj.scrollE.y.last_pos = $( this ).scrollTop();
+    } else if(side == 'x') {
+        elemontObj.scrollE.x.last_pos = $( this ).scrollLeft();
+    }
     elemontObj.scrollE[side].enabled = bool;
     return this;
 }
