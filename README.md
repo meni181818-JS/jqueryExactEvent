@@ -21,7 +21,13 @@ $( document ).on('scroll_x_only', function(e) {
     }
 });
 
+
 $( "div#abc" ).on('scroll_y_only', function() {
+
+});
+
+
+$( "div#abc" ).on('scroll_y_and_x', function() {
 
 });
 ```
