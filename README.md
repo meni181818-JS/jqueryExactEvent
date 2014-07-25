@@ -4,9 +4,9 @@ jqueryExactEvent
 Special and exact Events For jquery
 
 
-Events:
+scroll:
 -------
-#### scroll: ####
+#### Events: ####
 - `scroll_y_only` vertical scrolling Happens.
 
 - `scroll_x_only` Horizontal scrolling Happens.
@@ -38,3 +38,4 @@ $( "div#abc" ).on('scroll_y_only', function(e) {
     console.log(e.direction.y); // Possible output (for 'y'): 'down', 'up'
 });
 ```
+#### Methods ####
