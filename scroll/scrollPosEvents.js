@@ -1,65 +1,119 @@
-var scroll = {y: {last_pos: 0, update_pos: function() {this.last_pos = getScroll('y');}, enabled: true},
-              x: {last_pos: 0, update_pos: function() {this.last_pos = getScroll('x');} , enabled: true}};
-
-$( document ).scroll(function() {
-    if(scroll.y.last_pos != getScroll('y') && scroll.x.last_pos == getScroll('x')) { // if only y scrolled
-        $( document ).trigger( "scroll_y_only" );
-        if(scroll.y.enabled == false) { // block the y scroll if set to enabled = false
-            $( document ).scrollTop(scroll.y.last_pos); 
-        } else {
-            scroll.y.update_pos();
-        }
-    } else if(scroll.x.last_pos != getScroll('x') && scroll.y.last_pos == getScroll('y')) { // if only x scroled
-        $( document ).trigger( "scroll_x_only" );
-        if(scroll.x.enabled == false) { // block the x scroll if set to enabled = false
-           window.scrollTo(scroll.x.last_pos, null); 
-        } else {
-            scroll.x.update_pos();
-        }
-    } else if(scroll.y.last_pos != getScroll('y') && scroll.x.last_pos != getScroll('x')) { // if scroll y AND x
-        $( document ).trigger( "scroll_y_and_x" );
-        if(scroll.y.enabled == false) { // block the y scroll if set to enabled = false
-            $( document ).scrollTop(scroll.y.last_pos); 
-        } else {
-            scroll.y.update_pos();
-        }
-        if(scroll.x.enabled == false) { // block the x scroll if set to enabled = false
-           window.scrollTo(scroll.x.last_pos, null); 
-        } else {
-            scroll.x.update_pos();
-        }
-    }
+// listen to scroll event on #document
+$( document ).scroll(function(e) {
+    scrollingHandler(e);
+});
+// listen to scroll event on all other elements
+$( "*" ).scroll(function(e) {
+    scrollingHandler(e);
 });
 
-function getScroll(direction) {
-    if(direction == "y") {
-        return $( document ).scrollTop();
-    } else if(direction == "x") {
-        return window.pageXOffset || document.documentElement.scrollLeft;
-    } else {
-        return false;
+// handle scrolling event of ALL elements
+function scrollingHandler(e) {
+    // check if the scrolled element have 'scrollE' prop
+    $( e.target ).checkScrollRegistration();
+    
+    var scrollE = $( e.target )['0'].scrollE;
+    direction = {y: null, x: null}; // up or down or right or left
+
+    if(scrollE.y.last_pos != $( e.target ).scrollTop() && scrollE.x.last_pos == $( e.target ).scrollLeft()) { // if only y scrolled
+        direction.y = getUDRLdirection('y'); // set the 'direction.y' ('right' or 'left')
+        $( e.target ).trigger({ type: "scroll_y_only", direction: direction }); // fire the 'scroll_y_only' and pass the 'direction' object
+        checkIfBlockOrUpdate('y'); // block the scrolling if set to 'enabled = false', if not - update last_pos
+        
+    } else if(scrollE.y.last_pos == $( e.target ).scrollTop() && scrollE.x.last_pos != $( e.target ).scrollLeft()) { // if only x scroled
+        direction.x = getUDRLdirection('x'); // set the 'direction.x' ('right' or 'left')
+        $( e.target ).trigger({type: "scroll_x_only", direction: direction }); // fire the 'scroll_x_only' and pass the 'direction' object
+        checkIfBlockOrUpdate('x'); // block the scrolling if set to 'enabled = false', if not - update last_pos
+        
+    } else if(scrollE.y.last_pos != $( e.target ).scrollTop() && scrollE.x.last_pos != $( e.target ).scrollLeft()) { // if scroll y AND x
+        direction.y = getUDRLdirection('y'); // set the 'direction.y' ('right' or 'left')
+        direction.x = getUDRLdirection('x'); // set the 'direction.x' ('right' or 'left')
+        
+        $( e.target ).trigger( "scroll_y_and_x" ); // fire the 'scroll_y_and_x' and pass the 'direction' object
+        
+        checkIfBlockOrUpdate('y'); // block the scrolling if set to 'enabled = false', if not - update last_pos
+        checkIfBlockOrUpdate('x'); // block the scrolling if set to 'enabled = false', if not - update last_pos
     }
+    
+    // check ans return if the scroll was up or down or right or left. 'side' dan be 'y', 'x'
+    function getUDRLdirection(side) {
+        if(side == 'y') {
+            if($( e.target ).scrollTop() > scrollE.y.last_pos) {
+                return 'down';
+            } else {
+                return 'up';
+            }
+        } else if(side == 'x') {
+            if($( e.target ).scrollLeft() > scrollE.x.last_pos) {
+                return 'right';
+            } else {
+                return 'left';
+            }
+        } else {
+            return false;
+        }
+    }
+    
+    // block the scroll if set to enabled = false. if enabled = true, update last_pos
+    function checkIfBlockOrUpdate(side) {
+        if(side == 'y') {
+            if(scrollE.y.enabled == false) {
+                $( e.target ).scrollTop(scrollE.y.last_pos);
+            } else {
+                $( e.target ).updateLastScrollPos('y');
+            } 
+        } else if(side == 'x') {
+            if(scrollE.x.enabled == false) {
+                 $( e.target ).scrollLeft(scrollE.x.last_pos);
+            } else {
+                $( e.target ).updateLastScrollPos('x');
+            } 
+        }
+    }
+    
+} // END scrollingHandler
+
+// register new Scroll Element by add scrollE object
+$.fn.registerScrollElement = function() {
+    elemontObj = this['0'];
+    var scrollObj = {y: {last_pos: 0, enabled: true},
+                     x: {last_pos: 0, enabled: true}};
+    elemontObj.scrollE = $.extend(true, {}, scrollObj);
+    // update the 'last_pos' properties to the current position
+    $( this ).updateLastScrollPos('all');
+    return this;
 }
 
-/* usage:
-== Events:
+// update Last Scroll Pos to current pos (params can by: 'all', 'y', 'x')
+$.fn.updateLastScrollPos = function(which) {
+    elemontObj = this['0'];
+    if(which == 'all') {
+        elemontObj.scrollE.y.last_pos = $( this ).scrollTop();
+        elemontObj.scrollE.x.last_pos = $( this ).scrollLeft();
+    } else if(which == 'y') {
+        elemontObj.scrollE.y.last_pos = $( this ).scrollTop();
+    } else if(which == 'x') {
+        elemontObj.scrollE.x.last_pos = $( this ).scrollLeft();
+    }
+    return this;
+}
 
-$( document ).on('scroll_x_only', function() {
-    console.log("scrolling X only!");
-});
+// check if the element is registered for 'scrollE' object
+$.fn.checkScrollRegistration = function() {
+    elemontObj = this['0'];
+    if(elemontObj.hasOwnProperty('scrollE') == false) { // if not registered
+        // register it
+        $( this ).registerScrollElement();
+    }
+    return this;
+}
 
-$( document ).on('scroll_y_only', function() {
-    console.log("scrolling y only!");
-});
+// change the 'enabled' state of some side. side can be: 'y' or 'x'. bool can be: true or false
+$.fn.enableScroll = function(side, bool) {
+    $( this ).checkScrollRegistration();
+    elemontObj = this['0'];
+    $( this ).updateLastScrollPos(side); // update Last Scroll Pos (to lock on current pos)
+    elemontObj.scrollE[side].enabled = bool;
+    return this;
+}
 
-$( document ).on('scroll_y_and_x', function() {
-    console.log("scrolling y and x!");
-});
-
-== disable scroling:
-scroll.y.enabled = false;
-scroll.x.enabled = false;
-
-== TODO:
-pass params to events, like "Up", "down", "right", "left".
-*/
