@@ -39,3 +39,7 @@ $( "div#abc" ).on('scroll_y_only', function(e) {
 });
 ```
 #### Methods ####
+###### block vartical scrolling: ######
+```javascript
+$( document ).enabledScroll('x', false);
+```
