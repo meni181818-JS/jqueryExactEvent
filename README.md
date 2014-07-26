@@ -48,7 +48,7 @@ $( document ).enabledScroll('x', false);
 ```
 ###### Enable vartical scrolling: ######
 ```javascript
-$( document ).enabledScroll('x', false);
+$( document ).enabledScroll('x', true);
 ```
 ###### Disable Horizontal scrolling: ######
 ```javascript
@@ -56,5 +56,5 @@ $( document ).enabledScroll('y', false);
 ```
 ###### Enable Horizontal scrolling: ######
 ```javascript
-$( document ).enabledScroll('y', false);
+$( document ).enabledScroll('y', true);
 ```
