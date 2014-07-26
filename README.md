@@ -59,21 +59,21 @@ $( "div#abc" ).on('scroll_x_only', function(e) {
 #### Methods ####
 ###### Disable vartical scrolling: ######
 ```javascript
-$( document ).enabledScroll('y', false);
+$( document ).enableScroll('y', false);
 ```
 ###### Enable vartical scrolling: ######
 ```javascript
-$( document ).enabledScroll('y', true);
+$( document ).enableScroll('y', true);
 ```
 ###### Disable Horizontal scrolling: ######
 ```javascript
-$( document ).enabledScroll('x', false);
+$( document ).enableScroll('x', false);
 ```
 ###### Enable Horizontal scrolling: ######
 ```javascript
-$( document ).enabledScroll('x', true);
+$( document ).enableScroll('x', true);
 ```
 ###### get the current state (Enable/Disabled): ######
 ```javascript
-$( document ).enabledScroll('y'); // abc = true/false
+$( document ).enableScroll('y'); // abc = true/false
 ```
