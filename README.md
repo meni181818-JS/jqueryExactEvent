@@ -15,27 +15,32 @@ scroll:
 
 ##### Examples #####
 ```javascript
+// Horizontal scrolling Event:
 $( document ).on('scroll_x_only', function(e) {
     if(e.target.nodeName == '#document') {
         // do stuff
     }
 });
 
-
+// vertical scrolling Event:
 $( "div#abc" ).on('scroll_y_only', function() {
     // do stuff
 });
 
-
+// Horizontal And vertical scrolling in the same time:
 $( "div#abc" ).on('scroll_y_and_x', function() {
     // do stuff
 });
 ```
 you can access the direction of the scrolling by: `e.direction.y`.
-###### example ######
+###### example: ######
 ```javascript
 $( "div#abc" ).on('scroll_y_only', function(e) {
     console.log(e.direction.y); // Possible output (for 'y'): 'down', 'up'
+});
+
+$( "div#abc" ).on('scroll_y_only', function(e) {
+    console.log(e.direction.x); // Possible output (for 'x'): 'right', 'left'
 });
 ```
 #### Methods ####
