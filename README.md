@@ -2,7 +2,7 @@ jqueryExactEvent
 ================
 
 Special and exact Events For jquery.
-<br />License: [GNU v3](https://github.com/meni181818-JS/jqueryExactEvent/blob/master/LICENSE).
+<br />License: [GNU GPL v3](https://github.com/meni181818-JS/jqueryExactEvent/blob/master/LICENSE).
 <br />Copyright 2014 meni181818.
 
 
@@ -58,21 +58,21 @@ $( "div#abc" ).on('scroll_x_only', function(e) {
 #### Methods ####
 ###### Disable vartical scrolling: ######
 ```javascript
-$( document ).enabledScroll('x', false);
+$( document ).enabledScroll('y', false);
 ```
 ###### Enable vartical scrolling: ######
 ```javascript
-$( document ).enabledScroll('x', true);
+$( document ).enabledScroll('y', true);
 ```
 ###### Disable Horizontal scrolling: ######
 ```javascript
-$( document ).enabledScroll('y', false);
+$( document ).enabledScroll('x', false);
 ```
 ###### Enable Horizontal scrolling: ######
 ```javascript
-$( document ).enabledScroll('y', true);
+$( document ).enabledScroll('x', true);
 ```
 ###### get the current state (Enable/Disabled): ######
 ```javascript
-var abc = $( document ).enabledScroll('y'); // abc = true/false
+$( document ).enabledScroll('y'); // abc = true/false
 ```
