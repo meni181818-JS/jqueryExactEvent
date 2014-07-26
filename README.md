@@ -58,3 +58,7 @@ $( document ).enabledScroll('y', false);
 ```javascript
 $( document ).enabledScroll('y', true);
 ```
+###### get the current state (Enable/Disabled): ######
+```javascript
+var abc = $( document ).enabledScroll('y'); // => true/false
+```
