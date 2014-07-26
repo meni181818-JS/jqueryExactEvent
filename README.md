@@ -2,8 +2,8 @@ jqueryExactEvent
 ================
 
 Special and exact Events For jquery.
-License: [GNU v3](https://github.com/meni181818-JS/jqueryExactEvent/blob/master/LICENSE).
-Copyright 2014 meni181818.
+<br />License: [GNU v3](https://github.com/meni181818-JS/jqueryExactEvent/blob/master/LICENSE).
+<br />Copyright 2014 meni181818.
 
 
 scroll:
