@@ -37,7 +37,7 @@ $( "div#abc" ).on('scroll_y_only', function(e) {
     console.log(e.direction.y); // Possible output (for 'y'): 'down', 'up'
 });
 
-$( "div#abc" ).on('scroll_y_only', function(e) {
+$( "div#abc" ).on('scroll_x_only', function(e) {
     console.log(e.direction.x); // Possible output (for 'x'): 'right', 'left'
 });
 ```
