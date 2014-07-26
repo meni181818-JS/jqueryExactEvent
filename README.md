@@ -42,7 +42,19 @@ $( "div#abc" ).on('scroll_x_only', function(e) {
 });
 ```
 #### Methods ####
-###### block vartical scrolling: ######
+###### Disable vartical scrolling: ######
 ```javascript
 $( document ).enabledScroll('x', false);
+```
+###### Enable vartical scrolling: ######
+```javascript
+$( document ).enabledScroll('x', false);
+```
+###### Disable Horizontal scrolling: ######
+```javascript
+$( document ).enabledScroll('y', false);
+```
+###### Enable Horizontal scrolling: ######
+```javascript
+$( document ).enabledScroll('y', false);
 ```
