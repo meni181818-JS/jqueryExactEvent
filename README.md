@@ -1,7 +1,9 @@
 jqueryExactEvent
 ================
 
-Special and exact Events For jquery
+Special and exact Events For jquery.
+License: [GNU v3](https://github.com/meni181818-JS/jqueryExactEvent/blob/master/LICENSE).
+Copyright 2014 meni181818.
 
 
 scroll:
@@ -72,5 +74,5 @@ $( document ).enabledScroll('y', true);
 ```
 ###### get the current state (Enable/Disabled): ######
 ```javascript
-var abc = $( document ).enabledScroll('y'); // => true/false
+var abc = $( document ).enabledScroll('y'); // abc = true/false
 ```
