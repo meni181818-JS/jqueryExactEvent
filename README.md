@@ -31,7 +31,7 @@ $( "div#abc" ).on('scroll_y_and_x', function() {
 });
 ```
 
-<hr />
+> <hr />
 > NOTE: if you want to listen to Some of those Events on `#document` only (Without children), you wil neet to check the target of the Event. **example**:
 > ```js
 > $( document ).on('scroll_x_only', function(e) {
