@@ -16,10 +16,8 @@ scroll:
 ##### Examples #####
 ```javascript
 // Horizontal scrolling Event:
-$( document ).on('scroll_x_only', function(e) {
-    if(e.target.nodeName == '#document') {
+$( "div#abc" ).on('scroll_x_only', function(e) {
         // do stuff
-    }
 });
 
 // vertical scrolling Event:
