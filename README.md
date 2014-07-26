@@ -44,6 +44,7 @@ $( "div#abc" ).on('scroll_y_and_x', function() {
 > ```
 <hr />
 
+##### direction #####
 you can access the direction of the scrolling by: `e.direction.y`.
 ###### example: ######
 ```javascript
